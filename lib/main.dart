@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:jumpy_mvp/jumpy_app.dart';
-import 'package:jumpy_mvp/theme/theme.dart';
+import 'package:jumpy_mvp/features/challenges/data/database_repository.dart';
+import 'package:jumpy_mvp/features/challenges/data/mock_database.dart';
+import 'package:jumpy_mvp/features/challenges/models/challenge.dart';
+import 'package:jumpy_mvp/main_screen.dart';
 
 void main() {
-  runApp(const MainApp());
-}
+  DatabaseRepository mockDatabase = MockDatabase();
+  final List<Challenge> allChallenges = mockDatabase.getChallenges();
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: lightTheme(),
-      home: JumpyApp(),
-    );
-  }
+  runApp(MainApp(
+    challenges: allChallenges,
+  ));
 }
