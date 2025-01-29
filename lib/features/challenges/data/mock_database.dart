@@ -6,40 +6,44 @@ class MockDatabase implements DatabaseRepository {
   List<User> userData = [];
   List<Challenge> challenges = [
     Challenge(
-        id: 1,
-        name: '50 Jumps',
+        counts: 50,
+        category: 'Jumps',
         description: 'try to 50 times as fast as possible'),
     Challenge(
-        id: 2,
-        name: '100 Jumps',
+        counts: 100,
+        category: 'Jumps',
         description: 'try to 100 times as fast as possible'),
     Challenge(
-        id: 3,
-        name: '30 Squat Jumps',
+        counts: 30,
+        category: 'SquatJumps',
         description: 'try to 30 times as fast as possible'),
     Challenge(
-        id: 4,
-        name: '60 Squat Jumps',
+        counts: 60,
+        category: 'SquatJumps',
         description: 'try to 60 times as fast as possible'),
     Challenge(
-        id: 5,
-        name: '20 Rotation Jumps',
+        counts: 20,
+        category: 'Rotations',
         description: 'try to 20 times as fast as possible'),
     Challenge(
-        id: 6,
-        name: '40 Rotation Jumps',
+        counts: 40,
+        category: 'Rotations',
         description: 'try to 40 times as fast as possible'),
   ];
 
-  @override
-  void addUser(User user) {
-    userData.add(user);
-  }
+  // @override
+  // void addUser(User user) {
+  //   userData.add(user);
+  // }
 
-  @override
-  List<User> getUsers() {
-    return userData;
-  }
+  // @override
+  // List<User> getUsers() {
+  //   return userData;
+  // }
+  // @override
+  // void deleteUser() {
+  //   userData.removeLast();
+  // }
 
   @override
   void addChallenge(Challenge challenge) {
@@ -49,10 +53,5 @@ class MockDatabase implements DatabaseRepository {
   @override
   List<Challenge> getChallenges() {
     return challenges;
-  }
-
-  @override
-  void deleteUser() {
-    userData.removeLast();
   }
 }

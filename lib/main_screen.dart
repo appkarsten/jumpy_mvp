@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jumpy_mvp/features/auth/view/login_page.dart';
 import 'package:jumpy_mvp/features/challenges/models/challenge.dart';
 import 'package:jumpy_mvp/features/dashboard/screens/dashboard_page.dart';
 import 'package:jumpy_mvp/features/challenges/screens/challenges_page.dart';
@@ -42,7 +43,7 @@ class _JumpyAppState extends State<JumpyApp> {
         challenges: widget.challenges,
       ), // Choose your Game
       const Ranking(), // Filter the Best
-      const Friends(), // Community
+      const LoginPage(), // Community
     ];
   }
 
@@ -78,24 +79,6 @@ class _JumpyAppState extends State<JumpyApp> {
           ),
         ],
       ),
-      // bottomNavigationBar: NavigationBar(
-      //     selectedIndex: _activeIndex,
-      //     //indicatorColor: buttonBackground,
-      //     onDestinationSelected: (int index) {
-      //       setState(() {
-      //         _activeIndex = index;
-      //       });
-      //     },
-      //     destinations: const <Widget>[
-      //       NavigationDestination(
-      //         icon: Icon(Icons.image),
-      //         label: 'Gallery',
-      //       ),
-      //       NavigationDestination(
-      //         icon: Icon(Icons.person),
-      //         label: 'Über mich',
-      //       ),
-      //     ]),
     );
   }
 }

@@ -19,7 +19,7 @@ class User {
   });
 
   // 3. Zeit seit der letzten Anmeldung in Stunden
-  int? lastSeen() {
+  int lastSeen() {
     return DateTime.now().difference(lastLogin).inHours;
   }
 }

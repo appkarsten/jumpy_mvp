@@ -1,8 +1,11 @@
 class Challenge {
-  int id;
-  String name;
+  int counts;
+  String category;
   String description;
-  Challenge({required this.id, required this.name, required this.description});
+  Challenge(
+      {required this.counts,
+      required this.category,
+      required this.description});
 
   describe() {
     print(description);

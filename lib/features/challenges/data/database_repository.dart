@@ -4,10 +4,10 @@ import '../models/user.dart';
 
 abstract class DatabaseRepository {
   // User Methods
-  void addUser(User user);
-  List<User> getUsers();
+  // void addUser(User user);
+  // List<User> getUsers();
 
-  void deleteUser();
+  // void deleteUser();
   // void updateUser(User oldUser, User newUser);
   // // End User
 
