@@ -8,7 +8,7 @@ import 'package:jumpy_mvp/features/friends/friends_page.dart';
 import 'package:jumpy_mvp/features/ranking/screens/ranking_page.dart';
 import 'package:jumpy_mvp/gen/assets.gen.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
-import 'package:jumpy_mvp/theme/theme.dart';
+import 'package:jumpy_mvp/theme/app_theme.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({required this.challenges, super.key});
@@ -17,7 +17,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: lightTheme(),
+      theme: AppTheme().lightTheme,
       home: JumpyApp(
         challenges: challenges,
       ),
@@ -52,7 +52,6 @@ class _JumpyAppState extends State<JumpyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       body: _screens[_activeIndex],
       bottomNavigationBar: BottomNavigationBar(
