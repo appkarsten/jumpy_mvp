@@ -26,10 +26,9 @@ class Dashboard extends StatelessWidget {
                   bottom: 0,
                   left: 0,
                   child: Container(
-                      height: 100,
+                      height: 56,
                       width: 150,
-                      decoration:
-                          BoxDecoration(color: AppColors.headlineColor)),
+                      decoration: BoxDecoration(color: AppColors.animalColor)),
                 ),
                 Assets.images.powerAnimals.llama.svg(height: 350),
               ]),

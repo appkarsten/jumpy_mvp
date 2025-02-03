@@ -15,9 +15,26 @@ import 'package:vector_graphics/vector_graphics.dart' as _vg;
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// Directory path: assets/images/menu
+  $AssetsImagesMenuGen get menu => const $AssetsImagesMenuGen();
+
   /// Directory path: assets/images/power_animals
   $AssetsImagesPowerAnimalsGen get powerAnimals =>
       const $AssetsImagesPowerAnimalsGen();
+}
+
+class $AssetsImagesMenuGen {
+  const $AssetsImagesMenuGen();
+
+  /// File path: assets/images/menu/challenges.svg
+  SvgGenImage get challenges =>
+      const SvgGenImage('assets/images/menu/challenges.svg');
+
+  /// File path: assets/images/menu/home.svg
+  SvgGenImage get home => const SvgGenImage('assets/images/menu/home.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [challenges, home];
 }
 
 class $AssetsImagesPowerAnimalsGen {

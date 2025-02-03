@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 abstract class AppColors {
   static const primary = Colors.black45;
   static const headlineColor = Color(0xFF9E5499);
+  static const animalColor = Color.fromARGB(255, 203, 163, 200);
 
   static const mainBackground = Colors.white;
 

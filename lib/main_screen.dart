@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jumpy_mvp/features/auth/view/login_page.dart';
 import 'package:jumpy_mvp/features/challenges/models/challenge.dart';
 import 'package:jumpy_mvp/features/dashboard/screens/dashboard_page.dart';
 import 'package:jumpy_mvp/features/challenges/screens/challenges_page.dart';
 import 'package:jumpy_mvp/features/friends/friends_page.dart';
 import 'package:jumpy_mvp/features/ranking/screens/ranking_page.dart';
+import 'package:jumpy_mvp/gen/assets.gen.dart';
+import 'package:jumpy_mvp/theme/app_colors.dart';
 import 'package:jumpy_mvp/theme/theme.dart';
 
 class MainApp extends StatelessWidget {
@@ -54,6 +57,9 @@ class _JumpyAppState extends State<JumpyApp> {
       body: _screens[_activeIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _activeIndex,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        selectedItemColor: AppColors.headlineColor,
         type: BottomNavigationBarType.fixed,
         onTap: (index) {
           setState(() {
@@ -61,23 +67,26 @@ class _JumpyAppState extends State<JumpyApp> {
           });
         },
         items: [
-          BottomNavigationBarItem(
-            label: 'Dashboard',
-            icon: Icon(Icons.abc),
-          ),
-          BottomNavigationBarItem(
-            label: 'Challenges',
-            icon: Icon(Icons.accessible_forward),
-          ),
-          BottomNavigationBarItem(
-            label: 'Ranking',
-            icon: Icon(Icons.access_alarm_outlined),
-          ),
-          BottomNavigationBarItem(
-            label: 'Friends',
-            icon: Icon(Icons.account_tree_sharp),
-          ),
+          jumpyNavigationItem('home'),
+          jumpyNavigationItem('challenges'),
+          jumpyNavigationItem('ranking'),
+          jumpyNavigationItem('friends'),
         ],
+      ),
+    );
+  }
+
+  BottomNavigationBarItem jumpyNavigationItem(String label) {
+    return BottomNavigationBarItem(
+      label: label,
+      icon: SvgPicture.asset(
+        'assets/images/menu/$label.svg',
+        height: 45,
+      ),
+      activeIcon: SvgPicture.asset(
+        'assets/images/menu/$label.svg',
+        colorFilter: ColorFilter.mode(AppColors.headlineColor, BlendMode.srcIn),
+        height: 45,
       ),
     );
   }
