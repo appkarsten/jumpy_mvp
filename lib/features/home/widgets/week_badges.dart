@@ -5,8 +5,8 @@ import 'package:jumpy_mvp/gen/assets.gen.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
 
 class WeekBadges extends StatelessWidget {
-  WeekBadges({super.key, required this.title});
-  String title;
+  const WeekBadges({super.key, required this.title});
+  final String title;
 
   @override
   Widget build(BuildContext context) {

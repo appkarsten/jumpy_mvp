@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:jumpy_mvp/features/dashboard/widgets/dashboard_progress.dart';
-import 'package:jumpy_mvp/features/dashboard/widgets/select_goal.dart';
-import 'package:jumpy_mvp/features/dashboard/widgets/week_badges.dart';
+import 'package:jumpy_mvp/features/home/widgets/dashboard_progress.dart';
+import 'package:jumpy_mvp/features/home/widgets/select_goal.dart';
+import 'package:jumpy_mvp/features/home/widgets/week_badges.dart';
 import 'package:jumpy_mvp/gen/assets.gen.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
 
@@ -10,7 +10,7 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int progress = 96;
+    int progress = 76;
     double llamaHeight = 290;
     double fillHeight = llamaHeight / 100 * progress;
     switch (progress) {
