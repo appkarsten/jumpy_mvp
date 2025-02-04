@@ -4,9 +4,7 @@ import 'package:jumpy_mvp/features/auth/view/login_page.dart';
 import 'package:jumpy_mvp/features/challenges/models/challenge.dart';
 import 'package:jumpy_mvp/features/dashboard/screens/dashboard_page.dart';
 import 'package:jumpy_mvp/features/challenges/screens/challenges_page.dart';
-import 'package:jumpy_mvp/features/friends/friends_page.dart';
 import 'package:jumpy_mvp/features/ranking/screens/ranking_page.dart';
-import 'package:jumpy_mvp/gen/assets.gen.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
 import 'package:jumpy_mvp/theme/app_theme.dart';
 
@@ -54,23 +52,27 @@ class _JumpyAppState extends State<JumpyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screens[_activeIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _activeIndex,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedItemColor: AppColors.headlineColor,
-        type: BottomNavigationBarType.fixed,
-        onTap: (index) {
-          setState(() {
-            _activeIndex = index;
-          });
-        },
-        items: [
-          jumpyNavigationItem('home'),
-          jumpyNavigationItem('challenges'),
-          jumpyNavigationItem('ranking'),
-          jumpyNavigationItem('friends'),
-        ],
+      bottomNavigationBar: SizedBox(
+        height: 88,
+        child: BottomNavigationBar(
+          currentIndex: _activeIndex,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedFontSize: 0,
+          selectedItemColor: AppColors.headlineColor,
+          type: BottomNavigationBarType.fixed,
+          onTap: (index) {
+            setState(() {
+              _activeIndex = index;
+            });
+          },
+          items: [
+            jumpyNavigationItem('home'),
+            jumpyNavigationItem('challenges'),
+            jumpyNavigationItem('ranking'),
+            jumpyNavigationItem('friends'),
+          ],
+        ),
       ),
     );
   }
@@ -78,14 +80,21 @@ class _JumpyAppState extends State<JumpyApp> {
   BottomNavigationBarItem jumpyNavigationItem(String label) {
     return BottomNavigationBarItem(
       label: label,
-      icon: SvgPicture.asset(
-        'assets/images/menu/$label.svg',
-        height: 45,
+      icon: Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: SvgPicture.asset(
+          'assets/images/menu/$label.svg',
+          height: 45,
+        ),
       ),
-      activeIcon: SvgPicture.asset(
-        'assets/images/menu/$label.svg',
-        colorFilter: ColorFilter.mode(AppColors.headlineColor, BlendMode.srcIn),
-        height: 45,
+      activeIcon: Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: SvgPicture.asset(
+          'assets/images/menu/$label.svg',
+          colorFilter:
+              ColorFilter.mode(AppColors.headlineColor, BlendMode.srcIn),
+          height: 45,
+        ),
       ),
     );
   }

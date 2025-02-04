@@ -20,7 +20,7 @@ class AppTheme {
         ),
         textTheme: TextTheme(
           titleLarge: TextStyle(
-              fontSize: 25,
+              fontSize: 35,
               fontWeight: FontWeight.bold,
               color: AppColors.cardTitleLarge),
           titleMedium: TextStyle(
@@ -31,6 +31,12 @@ class AppTheme {
             fontSize: 28,
             // fontWeight: FontWeight.bold,
             fontWeight: FontWeight.w700,
+            color: AppColors.headlineColor,
+          ),
+          headlineMedium: TextStyle(
+            fontSize: 22,
+            // fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w500,
             color: AppColors.headlineColor,
           ),
           bodyLarge: TextStyle(

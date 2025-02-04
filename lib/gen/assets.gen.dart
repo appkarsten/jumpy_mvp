@@ -15,12 +15,25 @@ import 'package:vector_graphics/vector_graphics.dart' as _vg;
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// Directory path: assets/images/jcons
+  $AssetsImagesJconsGen get jcons => const $AssetsImagesJconsGen();
+
   /// Directory path: assets/images/menu
   $AssetsImagesMenuGen get menu => const $AssetsImagesMenuGen();
 
   /// Directory path: assets/images/power_animals
   $AssetsImagesPowerAnimalsGen get powerAnimals =>
       const $AssetsImagesPowerAnimalsGen();
+}
+
+class $AssetsImagesJconsGen {
+  const $AssetsImagesJconsGen();
+
+  /// File path: assets/images/jcons/badge.svg
+  SvgGenImage get badge => const SvgGenImage('assets/images/jcons/badge.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [badge];
 }
 
 class $AssetsImagesMenuGen {
@@ -30,11 +43,19 @@ class $AssetsImagesMenuGen {
   SvgGenImage get challenges =>
       const SvgGenImage('assets/images/menu/challenges.svg');
 
+  /// File path: assets/images/menu/friends.svg
+  SvgGenImage get friends =>
+      const SvgGenImage('assets/images/menu/friends.svg');
+
   /// File path: assets/images/menu/home.svg
   SvgGenImage get home => const SvgGenImage('assets/images/menu/home.svg');
 
+  /// File path: assets/images/menu/ranking.svg
+  SvgGenImage get ranking =>
+      const SvgGenImage('assets/images/menu/ranking.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [challenges, home];
+  List<SvgGenImage> get values => [challenges, friends, home, ranking];
 }
 
 class $AssetsImagesPowerAnimalsGen {

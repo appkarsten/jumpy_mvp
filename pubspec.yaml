@@ -25,6 +25,7 @@ flutter:
     - assets/images/
     - assets/images/power_animals/
     - assets/images/menu/
+    - assets/images/jcons/
 
 flutter_gen:
   integrations:

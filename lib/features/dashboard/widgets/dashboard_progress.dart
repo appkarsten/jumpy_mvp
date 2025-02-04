@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
+// ignore: must_be_immutable
 class DashboardProgress extends StatelessWidget {
   DashboardProgress({
     super.key,
