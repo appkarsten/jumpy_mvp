@@ -10,7 +10,7 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int progress = 76;
+    int progress = 50;
     double llamaHeight = 290;
     double fillHeight = llamaHeight / 100 * progress;
     switch (progress) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jumpy_mvp/features/auth/view/login_page.dart';
-import 'package:jumpy_mvp/features/challenges/models/challenge.dart';
+import 'package:jumpy_mvp/models/challenge.dart';
 import 'package:jumpy_mvp/features/home/screens/home_view.dart';
 import 'package:jumpy_mvp/features/challenges/screens/challenges_view.dart';
 import 'package:jumpy_mvp/features/ranking/screens/ranking_view.dart';

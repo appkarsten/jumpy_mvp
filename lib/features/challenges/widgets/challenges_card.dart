@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jumpy_mvp/features/challenges/models/challenge.dart';
+import 'package:jumpy_mvp/models/challenge.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
 
 class ChallengesCard extends StatelessWidget {

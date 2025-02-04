@@ -3,7 +3,17 @@ import '../models/user.dart';
 import 'database_repository.dart';
 
 class MockDatabase implements DatabaseRepository {
-  List<User> userData = [];
+  List<User> users = [
+    User(
+      id: 1,
+      email: 'stnstn@posteo.de',
+      name: 'Sten',
+      role: 'Admin',
+      isVerified: true,
+      createdAt: DateTime.now(),
+      lastLogin: DateTime.now(),
+    )
+  ];
   List<Challenge> challenges = [
     Challenge(
         counts: 50,
@@ -48,6 +58,11 @@ class MockDatabase implements DatabaseRepository {
   @override
   void addChallenge(Challenge challenge) {
     challenges.add(challenge);
+  }
+
+  @override
+  List<User> getUsers() {
+    return users;
   }
 
   @override
