@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jumpy_mvp/features/home/widgets/dashboard_progress.dart';
+import 'package:jumpy_mvp/features/home/widgets/home_progress.dart';
 import 'package:jumpy_mvp/features/home/widgets/select_goal.dart';
 import 'package:jumpy_mvp/features/home/widgets/week_badges.dart';
 import 'package:jumpy_mvp/gen/assets.gen.dart';
@@ -10,7 +10,7 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int progress = 50;
+    int progress = 75;
     double llamaHeight = 290;
     double fillHeight = llamaHeight / 100 * progress;
     switch (progress) {
@@ -26,7 +26,10 @@ class Dashboard extends StatelessWidget {
         fillHeight *= 0.92;
     }
     return Scaffold(
-      appBar: AppBar(title: Text('See whats up')),
+      appBar: AppBar(
+        title: Text('See whats up'),
+        actions: [IconButton(onPressed: null, icon: Icon(Icons.settings))],
+      ),
       body: Column(
         children: [
           Padding(
@@ -47,11 +50,11 @@ class Dashboard extends StatelessWidget {
                       left: 0,
                       child: Container(
                           height: fillHeight,
-                          width: 150,
+                          width: 190,
                           decoration:
                               BoxDecoration(color: AppColors.animalColor)),
                     ),
-                    Assets.images.powerAnimals.llama.svg(height: llamaHeight),
+                    Assets.images.powerAnimals.lama.image(height: llamaHeight),
                   ]),
                   DashboardProgress(progress: progress)
                 ],

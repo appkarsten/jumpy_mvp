@@ -24,6 +24,9 @@ class $AssetsImagesGen {
   /// Directory path: assets/images/power_animals
   $AssetsImagesPowerAnimalsGen get powerAnimals =>
       const $AssetsImagesPowerAnimalsGen();
+
+  /// Directory path: assets/images/users
+  $AssetsImagesUsersGen get users => const $AssetsImagesUsersGen();
 }
 
 class $AssetsImagesJconsGen {
@@ -61,18 +64,178 @@ class $AssetsImagesMenuGen {
 class $AssetsImagesPowerAnimalsGen {
   const $AssetsImagesPowerAnimalsGen();
 
-  /// File path: assets/images/power_animals/llama.svg
-  SvgGenImage get llama =>
-      const SvgGenImage('assets/images/power_animals/llama.svg');
+  /// File path: assets/images/power_animals/lama.png
+  AssetGenImage get lama =>
+      const AssetGenImage('assets/images/power_animals/lama.png');
+
+  /// File path: assets/images/power_animals/monkey.png
+  AssetGenImage get monkey =>
+      const AssetGenImage('assets/images/power_animals/monkey.png');
+
+  /// File path: assets/images/power_animals/octopus.png
+  AssetGenImage get octopus =>
+      const AssetGenImage('assets/images/power_animals/octopus.png');
+
+  /// File path: assets/images/power_animals/penguin.png
+  AssetGenImage get penguin =>
+      const AssetGenImage('assets/images/power_animals/penguin.png');
+
+  /// File path: assets/images/power_animals/raccoon.png
+  AssetGenImage get raccoon =>
+      const AssetGenImage('assets/images/power_animals/raccoon.png');
 
   /// List of all assets
-  List<SvgGenImage> get values => [llama];
+  List<AssetGenImage> get values => [lama, monkey, octopus, penguin, raccoon];
+}
+
+class $AssetsImagesUsersGen {
+  const $AssetsImagesUsersGen();
+
+  /// File path: assets/images/users/user_1.jpg
+  AssetGenImage get user1 =>
+      const AssetGenImage('assets/images/users/user_1.jpg');
+
+  /// File path: assets/images/users/user_10.jpg
+  AssetGenImage get user10 =>
+      const AssetGenImage('assets/images/users/user_10.jpg');
+
+  /// File path: assets/images/users/user_11.jpg
+  AssetGenImage get user11 =>
+      const AssetGenImage('assets/images/users/user_11.jpg');
+
+  /// File path: assets/images/users/user_2.jpg
+  AssetGenImage get user2 =>
+      const AssetGenImage('assets/images/users/user_2.jpg');
+
+  /// File path: assets/images/users/user_3.jpg
+  AssetGenImage get user3 =>
+      const AssetGenImage('assets/images/users/user_3.jpg');
+
+  /// File path: assets/images/users/user_4.jpg
+  AssetGenImage get user4 =>
+      const AssetGenImage('assets/images/users/user_4.jpg');
+
+  /// File path: assets/images/users/user_5.jpg
+  AssetGenImage get user5 =>
+      const AssetGenImage('assets/images/users/user_5.jpg');
+
+  /// File path: assets/images/users/user_6.jpg
+  AssetGenImage get user6 =>
+      const AssetGenImage('assets/images/users/user_6.jpg');
+
+  /// File path: assets/images/users/user_7.jpg
+  AssetGenImage get user7 =>
+      const AssetGenImage('assets/images/users/user_7.jpg');
+
+  /// File path: assets/images/users/user_8.jpg
+  AssetGenImage get user8 =>
+      const AssetGenImage('assets/images/users/user_8.jpg');
+
+  /// File path: assets/images/users/user_9.jpg
+  AssetGenImage get user9 =>
+      const AssetGenImage('assets/images/users/user_9.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+        user1,
+        user10,
+        user11,
+        user2,
+        user3,
+        user4,
+        user5,
+        user6,
+        user7,
+        user8,
+        user9
+      ];
 }
 
 class Assets {
   Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
+}
+
+class AssetGenImage {
+  const AssetGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  });
+
+  final String _assetName;
+
+  final Size? size;
+  final Set<String> flavors;
+
+  Image image({
+    Key? key,
+    AssetBundle? bundle,
+    ImageFrameBuilder? frameBuilder,
+    ImageErrorWidgetBuilder? errorBuilder,
+    String? semanticLabel,
+    bool excludeFromSemantics = false,
+    double? scale,
+    double? width,
+    double? height,
+    Color? color,
+    Animation<double>? opacity,
+    BlendMode? colorBlendMode,
+    BoxFit? fit,
+    AlignmentGeometry alignment = Alignment.center,
+    ImageRepeat repeat = ImageRepeat.noRepeat,
+    Rect? centerSlice,
+    bool matchTextDirection = false,
+    bool gaplessPlayback = true,
+    bool isAntiAlias = false,
+    String? package,
+    FilterQuality filterQuality = FilterQuality.low,
+    int? cacheWidth,
+    int? cacheHeight,
+  }) {
+    return Image.asset(
+      _assetName,
+      key: key,
+      bundle: bundle,
+      frameBuilder: frameBuilder,
+      errorBuilder: errorBuilder,
+      semanticLabel: semanticLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      scale: scale,
+      width: width,
+      height: height,
+      color: color,
+      opacity: opacity,
+      colorBlendMode: colorBlendMode,
+      fit: fit,
+      alignment: alignment,
+      repeat: repeat,
+      centerSlice: centerSlice,
+      matchTextDirection: matchTextDirection,
+      gaplessPlayback: gaplessPlayback,
+      isAntiAlias: isAntiAlias,
+      package: package,
+      filterQuality: filterQuality,
+      cacheWidth: cacheWidth,
+      cacheHeight: cacheHeight,
+    );
+  }
+
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
+
+  String get path => _assetName;
+
+  String get keyName => _assetName;
 }
 
 class SvgGenImage {

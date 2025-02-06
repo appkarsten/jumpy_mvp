@@ -27,6 +27,10 @@ class AppTheme {
               fontSize: 18,
               fontWeight: FontWeight.w500,
               color: AppColors.cardTitleMedium),
+          titleSmall: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: AppColors.textColor),
           headlineLarge: TextStyle(
             fontSize: 28,
             // fontWeight: FontWeight.bold,
@@ -39,12 +43,18 @@ class AppTheme {
             fontWeight: FontWeight.w500,
             color: AppColors.headlineColor,
           ),
+          headlineSmall: TextStyle(
+            fontSize: 19,
+            // fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w400,
+            color: AppColors.headlineColor,
+          ),
           bodyLarge: TextStyle(
             fontSize: 28,
             color: AppColors.textColor,
           ),
           bodyMedium: TextStyle(
-              color: AppColors.primary,
+              color: AppColors.textColor,
               fontSize: 14,
               letterSpacing: -0.5,
               height: 1.3),

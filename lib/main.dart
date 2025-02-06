@@ -9,9 +9,9 @@ void main() {
   DatabaseRepository mockDatabase = MockDatabase();
 
   final List<Challenge> allChallenges = mockDatabase.getChallenges();
-  //final List<User> allUsers = mockDatabase.getUsers();
-
+  final List<User> allUsers = mockDatabase.getUsers();
   runApp(MainApp(
     challenges: allChallenges,
+    users: allUsers,
   ));
 }

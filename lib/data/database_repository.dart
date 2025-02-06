@@ -20,4 +20,5 @@ abstract class DatabaseRepository {
   void addChallenge(Challenge challenge);
   List<Challenge> getChallenges();
   // End Challenge
+  List<User> getUsers();
 }
