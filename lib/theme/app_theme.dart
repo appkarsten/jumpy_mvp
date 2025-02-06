@@ -18,6 +18,7 @@ class AppTheme {
             fontWeight: FontWeight.bold,
           ),
         ),
+        
         textTheme: TextTheme(
           titleLarge: TextStyle(
               fontSize: 35,
@@ -59,5 +60,11 @@ class AppTheme {
               letterSpacing: -0.5,
               height: 1.3),
         ),
+
+// Buttons
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+          backgroundColor: WidgetStatePropertyAll<Color>(AppColors.animalColor),
+        )),
       );
 }

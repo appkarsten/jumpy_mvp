@@ -2,17 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:jumpy_mvp/features/home/widgets/home_progress.dart';
 import 'package:jumpy_mvp/features/home/widgets/select_goal.dart';
 import 'package:jumpy_mvp/features/home/widgets/week_badges.dart';
+import 'package:jumpy_mvp/features/user_settings/screens/user_settings.dart';
 import 'package:jumpy_mvp/gen/assets.gen.dart';
+import 'package:jumpy_mvp/models/user.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
 
 class Dashboard extends StatelessWidget {
-  const Dashboard({super.key});
+  const Dashboard({super.key, required this.users});
+  final List<User> users;
 
   @override
   Widget build(BuildContext context) {
+    // sample values for demonstration
+    // todo update image and container sizes for responsive
     int progress = 75;
     double llamaHeight = 290;
     double fillHeight = llamaHeight / 100 * progress;
+    // fake fill area math
     switch (progress) {
       case < 30:
         fillHeight *= 0.7;
@@ -28,7 +34,17 @@ class Dashboard extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('See whats up'),
-        actions: [IconButton(onPressed: null, icon: Icon(Icons.settings))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => UserSettings(users: users)),
+                );
+              },
+              icon: Icon(Icons.settings))
+        ],
       ),
       body: Column(
         children: [

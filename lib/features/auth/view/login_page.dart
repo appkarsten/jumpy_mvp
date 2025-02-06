@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+// non productive code from teaching session
+// with simple login fields
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 

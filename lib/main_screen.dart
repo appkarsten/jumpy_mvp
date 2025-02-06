@@ -43,7 +43,7 @@ class _JumpyAppState extends State<JumpyApp> {
   void initState() {
     super.initState();
     _screens = [
-      const Dashboard(), // Home Screen with statistic
+      Dashboard(users: widget.users), // Home Screen with statistic
       ChallengesPage(
         challenges: widget.challenges,
       ), // Choose your Game
