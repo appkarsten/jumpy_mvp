@@ -18,6 +18,7 @@ class DashboardProgress extends StatelessWidget {
         Spacer(
           flex: 2,
         ),
+        // set styled text indicator
         Text((progress * 10).toString(),
             style: Theme.of(context).textTheme.headlineLarge),
         Text('von'),
@@ -25,6 +26,8 @@ class DashboardProgress extends StatelessWidget {
         Spacer(
           flex: 2,
         ),
+        // set circular indicator
+        // todo create with gradient
         CircularPercentIndicator(
           radius: 48,
           lineWidth: 11,

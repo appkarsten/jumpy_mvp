@@ -4,6 +4,9 @@ import 'package:jumpy_mvp/features/ranking/widgets/ranking_top.dart';
 import 'package:jumpy_mvp/models/user.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
 
+// formats any user list with 2 designs
+// winners (first 3) in a header vieew
+// the rest as scrollable list
 class Ranking extends StatelessWidget {
   const Ranking({required this.users, super.key});
   final List<User> users;
@@ -22,6 +25,7 @@ class Ranking extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                // call ranking top from ranking widgets
                 for (int i = 0; i < 3; i++) RankingTop(users: users, i: i)
               ],
             ),
@@ -38,6 +42,7 @@ class Ranking extends StatelessWidget {
                                   color: AppColors.textColor
                                       .withValues(alpha: 0.2)))),
                       height: 70,
+                      // call widget ranking from for from ranking widgets
                       child: RankingFromFour(users: users, i: i))
               ]),
             ),

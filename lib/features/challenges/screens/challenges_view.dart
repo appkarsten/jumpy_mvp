@@ -1,20 +1,24 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:jumpy_mvp/gen/assets.gen.dart';
+import 'package:jumpy_mvp/features/challenges/widgets/show_result.dart';
 import 'package:jumpy_mvp/models/challenge.dart';
 import 'package:jumpy_mvp/features/challenges/widgets/challenges_card.dart';
+import 'package:jumpy_mvp/shared/widgets/animal_fill.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class ChallengesPage extends StatefulWidget {
-  ChallengesPage({required this.challenges, super.key});
+  const ChallengesPage({required this.challenges, super.key});
   final List<Challenge> challenges;
 
   @override
   State<ChallengesPage> createState() => _ChallengesPageState();
 }
 
+// width category load categories
+// with state change of category
+// go to challenge starter
 class _ChallengesPageState extends State<ChallengesPage> {
   String category = '';
   int counts = 0;
@@ -29,6 +33,8 @@ class _ChallengesPageState extends State<ChallengesPage> {
           padding: const EdgeInsets.symmetric(horizontal: 6.0),
           child: GridView.builder(
             itemCount: widget.challenges.length,
+            // todo find out what slivergrid... is
+            // just forgot
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 1.25,
@@ -36,21 +42,28 @@ class _ChallengesPageState extends State<ChallengesPage> {
             itemBuilder: (BuildContext context, int index) {
               return InkWell(
                 onTap: () {
+                  // set state and load challenge starter
                   setState(() {
                     category = widget.challenges[index].category;
                     counts = widget.challenges[index].counts;
                   });
                 },
                 child:
+                    // call challenges card widget
                     ChallengesCard(challenges: widget.challenges, index: index),
               );
             },
           ),
         ),
       );
-    } else {
+    }
+    // section challenge starter
+    else {
+      double fillHeight = 400;
       return Scaffold(
         appBar: AppBar(
+            // create go back to challenge overview
+            // button
             leading: IconButton(
               onPressed: () {
                 setState(() {
@@ -74,55 +87,51 @@ class _ChallengesPageState extends State<ChallengesPage> {
           padding: const EdgeInsets.symmetric(vertical: 0.0),
           child: Column(
             children: [
-              Container(
-                height: 500,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Stack(children: [
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        child: Container(
-                            height: 400 / counts * _count,
-                            width: 190,
-                            decoration:
-                                BoxDecoration(color: AppColors.animalColor)),
-                      ),
-                      Assets.images.powerAnimals.lama.image(height: 400),
-                    ]),
-                    //DashboardProgress(progress: progress)
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Spacer(
-                          flex: 2,
-                        ),
-                        Text(_count.toString(),
-                            style: Theme.of(context).textTheme.headlineLarge),
-                        Text('von'),
-                        Text('$counts',
-                            style: Theme.of(context).textTheme.bodyLarge),
-                        Spacer(
-                          flex: 1,
-                        ),
-                        CircularPercentIndicator(
-                          radius: 48,
-                          lineWidth: 11,
-                          percent: _count / counts,
-                          progressColor: AppColors.accentColor,
-                          backgroundColor: AppColors.animalColor,
-                          circularStrokeCap: CircularStrokeCap.round,
-                          center: Text(
-                            '${(_count / counts * 100).toStringAsFixed(1)}%',
-                            style: Theme.of(context).textTheme.titleMedium,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 40.0),
+                child: SizedBox(
+                  height: fillHeight,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      AnimalFill(
+                          fillHeight: fillHeight / counts * _count,
+                          llamaHeight: fillHeight),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Spacer(
+                            flex: 2,
                           ),
-                        ),
-                        Spacer(),
-                      ],
-                    )
-                  ],
+                          // todo create widget in shared for circular and text indicator
+                          // hard coded repeat of text and circular indicator
+                          Text(_count.toString(),
+                              style: Theme.of(context).textTheme.headlineLarge),
+                          Text('von'),
+                          Text('$counts',
+                              style: Theme.of(context).textTheme.bodyLarge),
+                          Spacer(
+                            flex: 1,
+                          ),
+
+                          CircularPercentIndicator(
+                            radius: 48,
+                            lineWidth: 11,
+                            percent: _count / counts,
+                            progressColor: AppColors.accentColor,
+                            backgroundColor: AppColors.animalColor,
+                            circularStrokeCap: CircularStrokeCap.round,
+                            center: Text(
+                              '${(_count / counts * 100).toStringAsFixed(1)}%',
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                          ),
+                          Spacer(),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
               StopTime(count: _count, counts: counts),
@@ -144,6 +153,9 @@ class _ChallengesPageState extends State<ChallengesPage> {
   }
 }
 
+// todo rebuild with consistent micro/milli/seccond units
+// todo clean min:sec:ms format
+// create record button
 class StopTime extends StatefulWidget {
   const StopTime({super.key, required this.count, required this.counts});
   final int count;
@@ -154,6 +166,7 @@ class StopTime extends StatefulWidget {
 }
 
 class _StopTimeState extends State<StopTime> {
+  // initialize duration an timer
   Duration duration = Duration();
   Timer? timer;
 
@@ -165,18 +178,24 @@ class _StopTimeState extends State<StopTime> {
 
   void reset() {
     setState(() {
+      // reset duration
       duration = Duration();
     });
   }
 
   void addTime() {
     final addMilliseconds = 1;
+    // as long as count jumps < challenge jumps
+    // run stopwatch
     if (widget.count < widget.counts) {
       setState(() {
         final milliseconds = duration.inMilliseconds + addMilliseconds;
         duration = Duration(milliseconds: milliseconds);
       });
-    } else if (widget.count == widget.counts) {
+    }
+    // if count jumps equal challenge jumps
+    // stop watch and call bottom sheet with result
+    else if (widget.count == widget.counts) {
       timer?.cancel();
       timer = null;
       showModalBottomSheet(
@@ -199,6 +218,8 @@ class _StopTimeState extends State<StopTime> {
     return buildTime();
   }
 
+  // button with record symbol
+  // if stopwatch startet, replay symbol with running time
   Widget buildTime() {
     return InkWell(
         onTap: () {
@@ -219,68 +240,5 @@ class _StopTimeState extends State<StopTime> {
                       style: Theme.of(context).textTheme.headlineMedium),
                 ),
         ));
-  }
-}
-
-class ShowResult extends StatelessWidget {
-  const ShowResult({
-    super.key,
-    required this.context,
-    required this.duration,
-  });
-
-  final BuildContext context;
-  final Duration duration;
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(children: [
-      Container(
-        height: MediaQuery.sizeOf(context).height - 200,
-        decoration: BoxDecoration(
-            color: AppColors.mainBackground.withValues(alpha: 0.9)),
-        width: MediaQuery.sizeOf(context).width - 80,
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              CircleAvatar(
-                radius: 70,
-                backgroundImage: AssetImage('assets/images/users/user_1.jpg'),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Text(
-                  duration.inSeconds.toString(),
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Text(
-                  'WELL DONE',
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ElevatedButton(
-                    onPressed: null, child: Text('Show Leaderboard')),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: ElevatedButton(
-                    onPressed: null, child: Text('Challenge a Friend')),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child:
-                    ElevatedButton(onPressed: null, child: Text('Try Again')),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ]);
   }
 }

@@ -18,7 +18,8 @@ class AppTheme {
             fontWeight: FontWeight.bold,
           ),
         ),
-        
+
+// Textstyles
         textTheme: TextTheme(
           titleLarge: TextStyle(
               fontSize: 35,

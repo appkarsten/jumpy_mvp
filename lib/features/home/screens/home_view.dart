@@ -3,8 +3,8 @@ import 'package:jumpy_mvp/features/home/widgets/home_progress.dart';
 import 'package:jumpy_mvp/features/home/widgets/select_goal.dart';
 import 'package:jumpy_mvp/features/home/widgets/week_badges.dart';
 import 'package:jumpy_mvp/features/user_settings/screens/user_settings.dart';
-import 'package:jumpy_mvp/gen/assets.gen.dart';
 import 'package:jumpy_mvp/models/user.dart';
+import 'package:jumpy_mvp/shared/widgets/animal_fill.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
 
 class Dashboard extends StatelessWidget {
@@ -60,18 +60,11 @@ class Dashboard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Stack(children: [
-                    Positioned(
-                      bottom: 0,
-                      left: 0,
-                      child: Container(
-                          height: fillHeight,
-                          width: 190,
-                          decoration:
-                              BoxDecoration(color: AppColors.animalColor)),
-                    ),
-                    Assets.images.powerAnimals.lama.image(height: llamaHeight),
-                  ]),
+                  // call power animal builder from shared widgets
+                  AnimalFill(fillHeight: fillHeight, llamaHeight: llamaHeight),
+                  // call text indicator
+                  // and circular indicator
+                  // from home widgets
                   DashboardProgress(progress: progress)
                 ],
               ),
@@ -84,6 +77,8 @@ class Dashboard extends StatelessWidget {
               child: Row(
                 spacing: 16,
                 children: [
+                  // call fake badges from home badges widget
+                  // with random bool state
                   for (int i = 1; i < 15; i++) WeekBadges(title: 'Week $i')
                 ],
               ),
@@ -110,6 +105,7 @@ class Dashboard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  // call select goal from home widgets
                   for (int i = 500; i <= 2000; i = i + 500) SelectGoal(index: i)
                 ],
               )),

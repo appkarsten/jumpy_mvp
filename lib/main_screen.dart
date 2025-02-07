@@ -17,6 +17,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // load theme
       theme: AppTheme().lightTheme,
       home: JumpyApp(
         challenges: challenges,
@@ -37,6 +38,8 @@ class JumpyApp extends StatefulWidget {
 
 class _JumpyAppState extends State<JumpyApp> {
   int _activeIndex = 0;
+
+  // initialize main menu and send users and challenges lists
   List<Widget> _screens = [];
 
   @override
@@ -83,6 +86,7 @@ class _JumpyAppState extends State<JumpyApp> {
     );
   }
 
+  // build BottomNavigationBarItems with SVGs from Path
   BottomNavigationBarItem jumpyNavigationItem(String label) {
     return BottomNavigationBarItem(
       label: label,

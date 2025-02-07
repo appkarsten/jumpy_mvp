@@ -41,6 +41,7 @@ class RankingFromFour extends StatelessWidget {
               ),
             ],
           ),
+          // fake detail for smartwatch with random bool
           result == true
               ? Icon(
                   Icons.watch_outlined,
@@ -55,23 +56,5 @@ class RankingFromFour extends StatelessWidget {
         ],
       ),
     );
-    // return ListTile(
-    //   leading: CircleAvatar(
-    //     radius: 25,
-    //     backgroundImage: AssetImage('assets/images/users/user_${i + 1}.jpg'),
-    //   ),
-    //   title: Text(users[i].name, style: Theme.of(context).textTheme.titleSmall),
-    //   trailing: result == true
-    //       ? Icon(
-    //           Icons.watch_outlined,
-    //           size: 16,
-    //           color: AppColors.textColor,
-    //         )
-    //       : Icon(
-    //           Icons.smartphone_outlined,
-    //           size: 16,
-    //           color: AppColors.textColor,
-    //         ),
-    // );
   }
 }
