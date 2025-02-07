@@ -18,6 +18,12 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   build_runner:
   flutter_gen_runner:
+  flutter_launcher_icons: 
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/launcher.jpg"
 
 flutter:
   uses-material-design: true
