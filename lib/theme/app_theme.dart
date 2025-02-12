@@ -51,7 +51,7 @@ class AppTheme {
             fontWeight: FontWeight.w400,
             color: AppColors.headlineColor,
           ),
-          bodyLarge: TextStyle(
+          displayLarge: TextStyle(
             fontSize: 28,
             color: AppColors.textColor,
           ),
@@ -62,10 +62,22 @@ class AppTheme {
               height: 1.3),
         ),
 
+// TextFormField
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.headlineColor),
+          ),
+          labelStyle: TextStyle(
+            fontSize: 14,
+          ),
+        ),
+
 // Buttons
         elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
           backgroundColor: WidgetStatePropertyAll<Color>(AppColors.animalColor),
         )),
       );
+
+// Inputs
 }

@@ -22,7 +22,7 @@ class DashboardProgress extends StatelessWidget {
         Text((progress * 10).toString(),
             style: Theme.of(context).textTheme.headlineLarge),
         Text('von'),
-        Text('1000', style: Theme.of(context).textTheme.bodyLarge),
+        Text('1000', style: Theme.of(context).textTheme.displayLarge),
         Spacer(
           flex: 2,
         ),

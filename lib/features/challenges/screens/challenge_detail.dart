@@ -45,7 +45,7 @@ class ChallengeDetail extends StatelessWidget {
                           style: Theme.of(context).textTheme.headlineLarge),
                       Text('von'),
                       Text('$counts',
-                          style: Theme.of(context).textTheme.bodyLarge),
+                          style: Theme.of(context).textTheme.displayLarge),
                       Spacer(
                         flex: 1,
                       ),

@@ -53,7 +53,8 @@ class _JumpyAppState extends State<JumpyApp> {
       Ranking(
         users: widget.users,
       ), // Filter the Best
-      const LoginPage(), // Community
+      LoginPage(
+          users: widget.users, challenges: widget.challenges), // Community
     ];
   }
 

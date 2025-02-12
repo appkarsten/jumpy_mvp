@@ -14,7 +14,7 @@ class ChallengesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double side = index % 2 == 0 ? 0.02 : -0.02;
+    //double side = index % 2 == 0 ? 0.02 : -0.02;
     return Padding(
       padding: const EdgeInsets.all(6.0),
       child: /*Transform(
@@ -53,14 +53,5 @@ class ChallengesCard extends StatelessWidget {
       ),
       // ),
     );
-  }
-}
-
-class ChallengeDetailPage extends StatelessWidget {
-  const ChallengeDetailPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(body: Text('fsdsdfsdf'));
   }
 }

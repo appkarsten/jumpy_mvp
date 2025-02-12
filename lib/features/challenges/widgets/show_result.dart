@@ -38,7 +38,7 @@ class ShowResult extends StatelessWidget {
                 padding: const EdgeInsets.all(20.0),
                 child: Text(
                   'WELL DONE',
-                  style: Theme.of(context).textTheme.bodyLarge,
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
               ),
               Padding(
