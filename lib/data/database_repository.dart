@@ -3,8 +3,8 @@ import '../models/user.dart';
 
 abstract class DatabaseRepository {
   // List of Challenges
-  List<Challenge> getChallenges();
+  Future<List<Challenge>> getChallenges();
 
   // List of Users
-  List<User> getUsers();
+  Future<List<User>> getUsers();
 }

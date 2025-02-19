@@ -1,21 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:jumpy_mvp/data/database_repository.dart';
 import 'package:jumpy_mvp/features/user_settings/widgets/toggle_settings.dart';
 import 'package:jumpy_mvp/gen/assets.gen.dart';
 import 'package:jumpy_mvp/models/user.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
 
 class UserSettings extends StatefulWidget {
-  const UserSettings({super.key, required this.users});
-  final List<User> users;
+  const UserSettings({super.key, required this.repo});
+  final DatabaseRepository repo;
 
   @override
   State<UserSettings> createState() => _UserSettingsState();
 }
 
 class _UserSettingsState extends State<UserSettings> {
+  List<User> _users = [];
+  User? _user;
+  @override
+  void initState() {
+    super.initState();
+    getUser();
+  }
+
+  Future<void> getUser() async {
+    _users = await widget.repo.getUsers();
+    _user = _users[0];
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    User user = widget.users[0];
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
@@ -27,7 +41,7 @@ class _UserSettingsState extends State<UserSettings> {
           children: [
             Align(
                 alignment: Alignment.topLeft,
-                child: Text(user.email,
+                child: Text(_user?.email ?? 'loading...',
                     style: Theme.of(context).textTheme.titleMedium)),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),

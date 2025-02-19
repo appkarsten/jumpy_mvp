@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:jumpy_mvp/data/database_repository.dart';
 import 'package:jumpy_mvp/features/auth/view/login_page.dart';
 import 'package:jumpy_mvp/models/challenge.dart';
 import 'package:jumpy_mvp/models/user.dart';
@@ -10,9 +11,8 @@ import 'package:jumpy_mvp/theme/app_colors.dart';
 import 'package:jumpy_mvp/theme/app_theme.dart';
 
 class MainApp extends StatelessWidget {
-  const MainApp({required this.challenges, required this.users, super.key});
-  final List<Challenge> challenges;
-  final List<User> users;
+  const MainApp({required this.repo, super.key});
+  final repo;
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +20,17 @@ class MainApp extends StatelessWidget {
       // load theme
       theme: AppTheme().lightTheme,
       home: JumpyApp(
-        challenges: challenges,
-        users: users,
+        repo: repo,
+        //challenges: challenges,
+        //users: users,
       ),
     );
   }
 }
 
 class JumpyApp extends StatefulWidget {
-  const JumpyApp({required this.challenges, required this.users, super.key});
-  final List<Challenge> challenges;
-  final List<User> users;
+  const JumpyApp({required this.repo, super.key});
+  final DatabaseRepository repo;
 
   @override
   State<JumpyApp> createState() => _JumpyAppState();
@@ -38,6 +38,13 @@ class JumpyApp extends StatefulWidget {
 
 class _JumpyAppState extends State<JumpyApp> {
   int _activeIndex = 0;
+  List<User> getAllUser = [];
+  List<Challenge> getAllChallenge = [];
+
+  Future<void> getAllChallenges() async {
+    getAllChallenge = await widget.repo.getChallenges();
+    setState(() {});
+  }
 
   // initialize main menu and send users and challenges lists
   List<Widget> _screens = [];
@@ -45,21 +52,24 @@ class _JumpyAppState extends State<JumpyApp> {
   @override
   void initState() {
     super.initState();
-    _screens = [
-      Dashboard(users: widget.users), // Home Screen with statistic
-      ChallengesPage(
-        challenges: widget.challenges,
-      ), // Choose your Game
-      Ranking(
-        users: widget.users,
-      ), // Filter the Best
-      LoginPage(
-          users: widget.users, challenges: widget.challenges), // Community
-    ];
+    getAllChallenges();
   }
 
   @override
   Widget build(BuildContext context) {
+    _screens = [
+      Dashboard(
+        repo: widget.repo, // Home Screen with statistic
+      ),
+      ChallengesPage(
+        repo: widget.repo,
+        // challenges: getAllChallenge,
+      ), // Choose your Game
+      Ranking(
+        repo: widget.repo,
+      ), // Filter the Best
+      LoginPage(users: getAllUser, challenges: getAllChallenge), // Community
+    ];
     return Scaffold(
       body: _screens[_activeIndex],
       bottomNavigationBar: SizedBox(

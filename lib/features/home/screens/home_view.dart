@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:jumpy_mvp/data/database_repository.dart';
 import 'package:jumpy_mvp/features/home/widgets/home_progress.dart';
 import 'package:jumpy_mvp/features/home/widgets/select_goal.dart';
 import 'package:jumpy_mvp/features/home/widgets/week_badges.dart';
 import 'package:jumpy_mvp/features/user_settings/screens/user_settings.dart';
-import 'package:jumpy_mvp/models/user.dart';
 import 'package:jumpy_mvp/shared/widgets/animal_fill.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
 
-class Dashboard extends StatelessWidget {
-  const Dashboard({super.key, required this.users});
-  final List<User> users;
+class Dashboard extends StatefulWidget {
+  const Dashboard({super.key, required this.repo});
+  final DatabaseRepository repo;
 
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     // sample values for demonstration
@@ -40,7 +45,7 @@ class Dashboard extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => UserSettings(users: users)),
+                      builder: (context) => UserSettings(repo: widget.repo)),
                 );
               },
               icon: Icon(Icons.settings))

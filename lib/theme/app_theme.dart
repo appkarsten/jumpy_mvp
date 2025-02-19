@@ -60,17 +60,21 @@ class AppTheme {
               fontSize: 14,
               letterSpacing: -0.5,
               height: 1.3),
+          bodyLarge: TextStyle(
+            fontSize: 14,
+            color: AppColors.headlineColor,
+          ),
         ),
 
 // TextFormField
         inputDecorationTheme: InputDecorationTheme(
-          border: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.headlineColor),
-          ),
-          labelStyle: TextStyle(
-            fontSize: 14,
-          ),
-        ),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.headlineColor),
+            ),
+            labelStyle: TextStyle(
+              fontSize: 14,
+            ),
+            hintStyle: TextStyle(fontSize: 10)),
 
 // Buttons
         elevatedButtonTheme: ElevatedButtonThemeData(
