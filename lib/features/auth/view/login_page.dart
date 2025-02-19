@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:jumpy_mvp/data/database_repository.dart';
 import 'package:jumpy_mvp/features/auth/view/second_screen.dart';
-import 'package:jumpy_mvp/models/challenge.dart';
-import 'package:jumpy_mvp/models/user.dart';
 
 // non productive code from teaching session
 // with simple login fields
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key, required this.users, required this.challenges});
-  final List<User> users;
-  final List<Challenge> challenges;
+  const LoginPage({super.key, required this.repo});
+  final DatabaseRepository repo;
 
   @override
   State<LoginPage> createState() => _LoginPageState();

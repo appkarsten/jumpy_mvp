@@ -17,7 +17,7 @@ class ChallengesPage extends StatefulWidget {
 // with state change of category
 // go to challenge starter
 class _ChallengesPageState extends State<ChallengesPage> {
-  List<Challenge> getAllChallenge = [];
+  //List<Challenge> getAllChallenge = [];
   Future<List<Challenge>> getAllChallenges() async {
     return await widget.repo.getChallenges();
   }

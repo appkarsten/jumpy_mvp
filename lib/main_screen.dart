@@ -12,7 +12,7 @@ import 'package:jumpy_mvp/theme/app_theme.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({required this.repo, super.key});
-  final repo;
+  final DatabaseRepository repo;
 
   @override
   Widget build(BuildContext context) {
@@ -38,22 +38,26 @@ class JumpyApp extends StatefulWidget {
 
 class _JumpyAppState extends State<JumpyApp> {
   int _activeIndex = 0;
-  List<User> getAllUser = [];
-  List<Challenge> getAllChallenge = [];
-
-  Future<void> getAllChallenges() async {
-    getAllChallenge = await widget.repo.getChallenges();
-    setState(() {});
-  }
+  // TODO uncomment for loading on start
+  // List<User> getAllUser = [];
+  // List<Challenge> getAllChallenge = [];
+  // Future<void> getAllChallenges() async {
+  //   getAllChallenge = await widget.repo.getChallenges();
+  //   setState(() {});
+  // }
+  // Future<void> getAllUsers() async {
+  //   getAllUser = await widget.repo.getUsers();
+  //   setState(() {});
+  // }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getAllChallenges();
+  //   getAllUsers();
+  // }
 
   // initialize main menu and send users and challenges lists
   List<Widget> _screens = [];
-
-  @override
-  void initState() {
-    super.initState();
-    getAllChallenges();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +72,7 @@ class _JumpyAppState extends State<JumpyApp> {
       Ranking(
         repo: widget.repo,
       ), // Filter the Best
-      LoginPage(users: getAllUser, challenges: getAllChallenge), // Community
+      LoginPage(repo: widget.repo), // Community
     ];
     return Scaffold(
       body: _screens[_activeIndex],

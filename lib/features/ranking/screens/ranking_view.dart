@@ -8,12 +8,17 @@ import 'package:jumpy_mvp/theme/app_colors.dart';
 // formats any user list with 2 designs
 // winners (first 3) in a header vieew
 // the rest as scrollable list
-class Ranking extends StatelessWidget {
+class Ranking extends StatefulWidget {
   const Ranking({required this.repo, super.key});
   final DatabaseRepository repo;
 
+  @override
+  State<Ranking> createState() => _RankingState();
+}
+
+class _RankingState extends State<Ranking> {
   Future<List<User>?> _getAllUser() async {
-    return await repo.getUsers();
+    return await widget.repo.getUsers();
   }
 
   @override
