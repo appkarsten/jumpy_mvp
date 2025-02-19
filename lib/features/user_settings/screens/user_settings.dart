@@ -41,7 +41,7 @@ class _UserSettingsState extends State<UserSettings> {
           children: [
             Align(
                 alignment: Alignment.topLeft,
-                child: Text(_user?.email ?? 'loading...',
+                child: Text(_user?.email ?? 'loading User...',
                     style: Theme.of(context).textTheme.titleMedium)),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),

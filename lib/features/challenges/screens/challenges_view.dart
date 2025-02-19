@@ -67,6 +67,10 @@ class _ChallengesPageState extends State<ChallengesPage> {
                     ),
                   );
                 }
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Text('Error: ${snapshot.error}'),
+                );
               } else {
                 return Center(child: CircularProgressIndicator());
               }

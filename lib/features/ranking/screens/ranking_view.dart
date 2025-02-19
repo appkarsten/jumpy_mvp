@@ -64,6 +64,10 @@ class Ranking extends StatelessWidget {
                   ),
                 );
               }
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('Error: ${snapshot.error}'),
+              );
             } else {
               return Center(child: CircularProgressIndicator());
             }
