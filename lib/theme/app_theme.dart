@@ -5,7 +5,7 @@ class AppTheme {
   ThemeData get lightTheme => ThemeData(
         scaffoldBackgroundColor: AppColors.mainBackground,
         appBarTheme: AppBarTheme(
-          backgroundColor: AppColors.mainBackground,
+          backgroundColor: Colors.transparent,
           titleTextStyle: TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.w600,

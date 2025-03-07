@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jumpy_mvp/data/database_repository.dart';
 import 'package:jumpy_mvp/features/auth/view/login_page.dart';
-import 'package:jumpy_mvp/models/challenge.dart';
-import 'package:jumpy_mvp/models/user.dart';
 import 'package:jumpy_mvp/features/home/screens/home_view.dart';
 import 'package:jumpy_mvp/features/challenges/screens/challenges_view.dart';
 import 'package:jumpy_mvp/features/ranking/screens/ranking_view.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
 import 'package:jumpy_mvp/theme/app_theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weather_animation/weather_animation.dart';
 
 class MainApp extends StatelessWidget {
-  const MainApp({required this.repo, super.key});
+  const MainApp({required this.repo, required this.prefs, super.key});
   final DatabaseRepository repo;
+  final SharedPreferencesAsync prefs;
 
   @override
   Widget build(BuildContext context) {
