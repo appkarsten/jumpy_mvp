@@ -19,7 +19,23 @@ class _UserSettingsState extends State<UserSettings> {
   List<User> _users = [];
   User? _user;
   int condition = 0;
-  WeatherScene currentWeather = WeatherScene.scorchingSun;
+  // WeatherConfig sun = SunConfig(width: 10);
+  WrapperScene currentWeather = WrapperScene(
+    colors: [
+      Color.fromARGB(255, 190, 198, 246),
+      Color.fromARGB(255, 255, 255, 255),
+    ],
+    isLeftCornerGradient: true,
+    children: [
+      SunWidget(
+        sunConfig: SunConfig(width: 250),
+      ),
+      CloudWidget(
+        cloudConfig: CloudConfig(size: 60, y: 70),
+      ),
+      CloudWidget(),
+    ],
+  );
   @override
   void initState() {
     super.initState();
@@ -30,10 +46,21 @@ class _UserSettingsState extends State<UserSettings> {
   Future<void> getWeather() async {
     condition = await Weather.currentWeather();
     List<int> sun = [0, 1, 2];
-    if (sun.contains(condition)) {
-      currentWeather = WeatherScene.scorchingSun;
-    } else {
-      currentWeather = WeatherScene.rainyOvercast;
+    if (!sun.contains(condition)) {
+      currentWeather = WrapperScene(
+        colors: [
+          Color.fromARGB(255, 5, 10, 42),
+          Color.fromARGB(255, 255, 255, 255),
+        ],
+        isLeftCornerGradient: false,
+        children: [
+          CloudWidget(
+            cloudConfig: CloudConfig(size: 60, y: 70),
+          ),
+          RainWidget(),
+          WindWidget(),
+        ],
+      );
     }
     setState(() {});
   }
@@ -53,10 +80,11 @@ class _UserSettingsState extends State<UserSettings> {
           title: Text('Settings'),
         ),
         body: Stack(children: [
-          Container(
-              height: double.infinity,
-              width: double.infinity,
-              child: currentWeather.sceneWidget),
+          SizedBox(
+            height: 400,
+            width: double.infinity,
+            child: currentWeather,
+          ),
           Padding(
             padding: const EdgeInsets.only(
               left: 16.0,
