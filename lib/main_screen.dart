@@ -22,6 +22,7 @@ class MainApp extends StatelessWidget {
       theme: AppTheme().lightTheme,
       home: JumpyApp(
         repo: repo,
+        prefs: prefs,
         //challenges: challenges,
         //users: users,
       ),
@@ -30,8 +31,9 @@ class MainApp extends StatelessWidget {
 }
 
 class JumpyApp extends StatefulWidget {
-  const JumpyApp({required this.repo, super.key});
+  const JumpyApp({required this.repo, required this.prefs, super.key});
   final DatabaseRepository repo;
+  final SharedPreferencesAsync prefs;
 
   @override
   State<JumpyApp> createState() => _JumpyAppState();
@@ -65,6 +67,7 @@ class _JumpyAppState extends State<JumpyApp> {
     _screens = [
       Dashboard(
         repo: widget.repo, // Home Screen with statistic
+        prefs: widget.prefs,
       ),
       ChallengesPage(
         repo: widget.repo,

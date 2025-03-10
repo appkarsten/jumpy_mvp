@@ -5,11 +5,13 @@ import 'package:jumpy_mvp/features/user_settings/widgets/toggle_settings.dart';
 import 'package:jumpy_mvp/gen/assets.gen.dart';
 import 'package:jumpy_mvp/models/user.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_animation/weather_animation.dart';
 
 class UserSettings extends StatefulWidget {
-  const UserSettings({super.key, required this.repo});
+  const UserSettings({super.key, required this.repo, required this.prefs});
   final DatabaseRepository repo;
+  final SharedPreferencesAsync prefs;
 
   @override
   State<UserSettings> createState() => _UserSettingsState();
@@ -18,23 +20,11 @@ class UserSettings extends StatefulWidget {
 class _UserSettingsState extends State<UserSettings> {
   List<User> _users = [];
   User? _user;
-  int condition = 0;
+  Map condition = {};
   // WeatherConfig sun = SunConfig(width: 10);
   WrapperScene currentWeather = WrapperScene(
-    colors: [
-      Color.fromARGB(255, 190, 198, 246),
-      Color.fromARGB(255, 255, 255, 255),
-    ],
-    isLeftCornerGradient: true,
-    children: [
-      SunWidget(
-        sunConfig: SunConfig(width: 250),
-      ),
-      CloudWidget(
-        cloudConfig: CloudConfig(size: 60, y: 70),
-      ),
-      CloudWidget(),
-    ],
+    colors: [],
+    children: [],
   );
   @override
   void initState() {
@@ -45,23 +35,145 @@ class _UserSettingsState extends State<UserSettings> {
 
   Future<void> getWeather() async {
     condition = await Weather.currentWeather();
-    List<int> sun = [0, 1, 2];
-    if (!sun.contains(condition)) {
-      currentWeather = WrapperScene(
-        colors: [
-          Color.fromARGB(255, 5, 10, 42),
-          Color.fromARGB(255, 255, 255, 255),
-        ],
-        isLeftCornerGradient: false,
-        children: [
-          CloudWidget(
-            cloudConfig: CloudConfig(size: 60, y: 70),
-          ),
-          RainWidget(),
-          WindWidget(),
-        ],
-      );
+    condition['icon'] = 'rain';
+    switch (condition['icon']) {
+      case 'clear-day':
+        currentWeather = WrapperScene(
+          colors: [],
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 126, 178, 246),
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent,
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          )),
+          children: [
+            SunWidget(
+              sunConfig: SunConfig(width: 150),
+            ),
+          ],
+        );
+      case 'partly-cloudy-day':
+        currentWeather = WrapperScene(
+          colors: [
+            Color.fromARGB(255, 190, 198, 246),
+            Colors.transparent,
+            Colors.transparent,
+            Colors.transparent,
+          ],
+          isLeftCornerGradient: true,
+          children: [
+            SunWidget(
+              sunConfig: SunConfig(width: 250),
+            ),
+            CloudWidget(
+              cloudConfig: CloudConfig(size: 60, y: 70),
+            ),
+            CloudWidget(),
+          ],
+        );
+      case 'rain':
+        // currentWeather =
+        //     WrapperScene.weather(scene: WeatherScene.rainyOvercast);
+        currentWeather = const WrapperScene(
+          colors: [],
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            colors: [
+              Color(0xff424242),
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          )),
+          children: [
+            RainWidget(
+              rainConfig: RainConfig(
+                count: 30,
+                lengthDrop: 13,
+                widthDrop: 4,
+                color: Color(0x5e9e9e9e),
+                areaYStart: 145,
+              ),
+            ),
+            CloudWidget(
+              cloudConfig: CloudConfig(
+                  size: 140,
+                  color: Color(0xcdbdbdbd),
+                  icon: IconData(63056, fontFamily: 'MaterialIcons'),
+                  widgetCloud: null,
+                  x: 180,
+                  y: 10,
+                  scaleBegin: 1,
+                  scaleEnd: 1.1,
+                  scaleCurve: Cubic(0.40, 0.00, 0.20, 1.00),
+                  slideX: 11,
+                  slideY: 13,
+                  slideDurMill: 4000,
+                  slideCurve: Cubic(0.40, 0.00, 0.20, 1.00)),
+            ),
+            CloudWidget(
+              cloudConfig: CloudConfig(
+                  size: 100,
+                  color: Color(0x92fafafa),
+                  icon: IconData(63056, fontFamily: 'MaterialIcons'),
+                  widgetCloud: null,
+                  x: 100,
+                  y: 60,
+                  scaleBegin: 1,
+                  scaleEnd: 1.08,
+                  scaleCurve: Cubic(0.40, 0.00, 0.20, 1.00),
+                  slideX: 20,
+                  slideY: 0,
+                  slideDurMill: 3000,
+                  slideCurve: Cubic(0.40, 0.00, 0.20, 1.00)),
+            ),
+            CloudWidget(
+              cloudConfig: CloudConfig(
+                  size: 75,
+                  color: Color(0xb5fafafa),
+                  icon: IconData(63056, fontFamily: 'MaterialIcons'),
+                  widgetCloud: null,
+                  x: 160,
+                  y: 90,
+                  scaleBegin: 1,
+                  scaleEnd: 1.1,
+                  scaleCurve: Cubic(0.40, 0.00, 0.20, 1.00),
+                  slideX: 20,
+                  slideY: 4,
+                  slideDurMill: 2000,
+                  slideCurve: Cubic(0.40, 0.00, 0.20, 1.00)),
+            ),
+          ],
+        );
+      default:
+        currentWeather = WrapperScene(
+          colors: [],
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            colors: [
+              Colors.pink,
+              Colors.transparent,
+              Colors.transparent,
+              Colors.transparent
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          )),
+          children: [
+            SunWidget(
+              sunConfig: SunConfig(width: 150),
+            ),
+          ],
+        );
     }
+
     setState(() {});
   }
 
@@ -81,7 +193,11 @@ class _UserSettingsState extends State<UserSettings> {
         ),
         body: Stack(children: [
           SizedBox(
-            height: 400,
+              height: 100,
+              width: 100,
+              child: Text('hi ${widget.prefs.toString()}')),
+          SizedBox(
+            height: 550,
             width: double.infinity,
             child: currentWeather,
           ),

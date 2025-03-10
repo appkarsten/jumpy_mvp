@@ -6,10 +6,12 @@ import 'package:jumpy_mvp/features/home/widgets/week_badges.dart';
 import 'package:jumpy_mvp/features/user_settings/screens/user_settings.dart';
 import 'package:jumpy_mvp/shared/widgets/animal_fill.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({super.key, required this.repo});
+  const Dashboard({super.key, required this.repo, required this.prefs});
   final DatabaseRepository repo;
+  final SharedPreferencesAsync prefs;
 
   @override
   State<Dashboard> createState() => _DashboardState();
@@ -45,7 +47,10 @@ class _DashboardState extends State<Dashboard> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => UserSettings(repo: widget.repo)),
+                      builder: (context) => UserSettings(
+                            repo: widget.repo,
+                            prefs: widget.prefs,
+                          )),
                 );
               },
               icon: Icon(Icons.settings))

@@ -4,10 +4,11 @@ import 'package:http/http.dart';
 import 'dart:convert';
 
 class Weather {
-  static Future<int> currentWeather() async {
+  static Future<Map> currentWeather() async {
     const List<String> uriString = [
-      'https://api.open-meteo.com/v1/forecast?latitude=8.2287&longitude=79.7599&current=temperature_2m,weather_code&hourly=temperature_2m,weather_code',
-      'https://api.open-meteo.com/v1/forecast?latitude=-53.9992&longitude=-38.1756&current=temperature_2m,weather_code&hourly=temperature_2m,weather_code',
+      'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/kalpitiya?unitGroup=metric&key=HEQ5H2LH62MFBESCKMQWMR2QB&contentType=json',
+      'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/leipzig?unitGroup=metric&key=HEQ5H2LH62MFBESCKMQWMR2QB&contentType=json',
+      'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/berlin?unitGroup=metric&key=HEQ5H2LH62MFBESCKMQWMR2QB&contentType=json',
     ];
     final response =
         await get(Uri.parse(uriString[Random().nextInt(uriString.length)]));
@@ -16,8 +17,10 @@ class Weather {
 
     // final List names = users.map((e) => e['name']).toList();
     // final List names
-    int conditions = weather['current']['weather_code'];
+    print(weather['currentConditions']);
+
+    //int conditions = weather['current']['weather_code'];
     // print(conditions);
-    return conditions;
+    return weather['currentConditions'];
   }
 }
