@@ -5,6 +5,8 @@ import 'package:jumpy_mvp/main_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   final DatabaseRepository repo = MockDatabaseRepository();
   final SharedPreferencesAsync prefs = SharedPreferencesAsync();
 

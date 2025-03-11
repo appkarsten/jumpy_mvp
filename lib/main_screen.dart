@@ -8,7 +8,6 @@ import 'package:jumpy_mvp/features/ranking/screens/ranking_view.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
 import 'package:jumpy_mvp/theme/app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weather_animation/weather_animation.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({required this.repo, required this.prefs, super.key});

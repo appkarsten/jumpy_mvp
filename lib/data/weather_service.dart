@@ -4,14 +4,10 @@ import 'package:http/http.dart';
 import 'dart:convert';
 
 class Weather {
-  static Future<Map> currentWeather() async {
-    const List<String> uriString = [
-      'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/kalpitiya?unitGroup=metric&key=HEQ5H2LH62MFBESCKMQWMR2QB&contentType=json',
-      'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/leipzig?unitGroup=metric&key=HEQ5H2LH62MFBESCKMQWMR2QB&contentType=json',
-      'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/berlin?unitGroup=metric&key=HEQ5H2LH62MFBESCKMQWMR2QB&contentType=json',
-    ];
-    final response =
-        await get(Uri.parse(uriString[Random().nextInt(uriString.length)]));
+  static Future<Map> currentWeather(String location) async {
+    final String uriString =
+        'https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{$location}?unitGroup=metric&include=current&key=HEQ5H2LH62MFBESCKMQWMR2QB&contentType=json';
+    final response = await get(Uri.parse(uriString));
     // final response = await get(Uri.parse(uriStringKalpitya));
     final weather = jsonDecode(response.body);
 
