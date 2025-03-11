@@ -26,7 +26,6 @@ class _UserSettingsState extends State<UserSettings> {
   List<String> settings = [];
   // WeatherConfig sun = SunConfig(width: 10);
   Widget currentWeather = WrapperScene(colors: [], children: []);
-  final TextEditingController location = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -39,7 +38,7 @@ class _UserSettingsState extends State<UserSettings> {
 
   Future<void> getWeather() async {
     final settings_ = await SharedPreferences.getInstance();
-    //await settings_.setStringList(_key, ['berlin']);
+    // await settings_.setStringList(_key, ['kalpitiya']);
     settings = settings_.getStringList(_key) ?? [];
     //TODO set start location on first app start
     condition = await Weather.currentWeather(settings[0]);
@@ -56,6 +55,9 @@ class _UserSettingsState extends State<UserSettings> {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    final TextEditingController location = TextEditingController(
+        text: settings.isEmpty ? 'Location' : settings[0]);
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -69,14 +71,17 @@ class _UserSettingsState extends State<UserSettings> {
             child: currentWeather,
           ),
           Positioned(
-              top: 135,
+              top: 120,
               right: 20,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  settings.isEmpty ? Text('test') : Text(settings[0]),
+                  settings.isEmpty ? Text('loading...') : Text(settings[0]),
                   SizedBox(
-                    child: Text('${condition['temp'].toString()} °C',
-                        style: Theme.of(context).textTheme.titleMedium),
+                    child: Text(
+                      '${condition['temp'].toString()} °C',
+                    ),
+                    // style: Theme.of(context).textTheme.titleMedium),
                   ),
                 ],
               )),
@@ -88,10 +93,42 @@ class _UserSettingsState extends State<UserSettings> {
             ),
             child: Column(
               children: [
-                TextFormField(
-                  controller: location,
-                  decoration:
-                      const InputDecoration(border: OutlineInputBorder()),
+                SizedBox(height: 40),
+                Form(
+                  key: formKey,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 220,
+                        child: TextFormField(
+                          controller: location,
+
+                          // settings.isEmpty ? '' : settings[0]),
+                          decoration: const InputDecoration(
+                            label: Text('Location'),
+                          ),
+                          validator: (String? value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Enter Location';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          if (formKey.currentState!.validate()) {
+                            final settings_ =
+                                await SharedPreferences.getInstance();
+                            await settings_
+                                .setStringList(_key, [location.value.text]);
+                            await getWeather();
+                          }
+                        },
+                        child: const Icon(Icons.refresh),
+                      ),
+                    ],
+                  ),
                 ),
                 Align(
                     alignment: Alignment.topLeft,

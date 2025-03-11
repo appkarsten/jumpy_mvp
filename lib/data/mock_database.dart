@@ -14,7 +14,7 @@ class MockDatabaseRepository implements DatabaseRepository {
     if (_users.isNotEmpty) {
       return _users;
     } else {
-      await Future.delayed(Duration(seconds: 5));
+      await Future.delayed(Duration(seconds: 1));
       _users = [...users];
       return _users;
     }
@@ -25,7 +25,7 @@ class MockDatabaseRepository implements DatabaseRepository {
     if (_challenges.isNotEmpty) {
       return _challenges;
     } else {
-      await Future.delayed(Duration(seconds: 5));
+      await Future.delayed(Duration(seconds: 1));
       _challenges = [...challenges];
       return _challenges;
     }
