@@ -1,48 +1,58 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:jumpy_mvp/data/database_repository.dart';
+import 'package:jumpy_mvp/data/shared_database_repository.dart';
 import 'package:jumpy_mvp/data/weather_service.dart';
 import 'package:jumpy_mvp/features/user_settings/widgets/toggle_settings.dart';
 import 'package:jumpy_mvp/gen/assets.gen.dart';
 import 'package:jumpy_mvp/models/user.dart';
 import 'package:jumpy_mvp/shared/widgets/get_weather_theme.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_animation/weather_animation.dart';
 
 class UserSettings extends StatefulWidget {
   const UserSettings({super.key, required this.repo, required this.prefs});
   final DatabaseRepository repo;
-  final SharedPreferencesAsync prefs;
+  final SharedDatabaseRepository prefs;
 
   @override
   State<UserSettings> createState() => _UserSettingsState();
 }
 
 class _UserSettingsState extends State<UserSettings> {
+  Map<String, dynamic> settings = {};
   List<User> _users = [];
   User? _user;
   Map condition = {};
   final String _key = 'settings';
-  List<String> settings = [];
   // WeatherConfig sun = SunConfig(width: 10);
   Widget currentWeather = WrapperScene(colors: [], children: []);
   @override
   void initState() {
     super.initState();
     getUser();
-    getWeather();
-    getLocation();
+    _updateSettings();
   }
 
-  Future<void> getLocation() async {}
+  Future<void> _updateSettings() async {
+    //TODO set initial userSetting during onboarding
+    // final Map<String, dynamic> userSettings = {
+    //   'location': 'Berlin',
+    //   'sound': true,
+    //   'reminder': true,
+    //   'userNotification': true,
+    // };
+    // await widget.prefs.saveSettings(userSettings);
+    settings = jsonDecode(await widget.prefs.getSettings());
+    print(settings['location']);
+    getWeather();
+    setState(() {});
+  }
 
   Future<void> getWeather() async {
-    final settings_ = await SharedPreferences.getInstance();
-    // await settings_.setStringList(_key, ['kalpitiya']);
-    settings = settings_.getStringList(_key) ?? [];
-    //TODO set start location on first app start
-    condition = await Weather.currentWeather(settings[0]);
-    //condition['icon'] = 'clear-day';
+    condition = await Weather.currentWeather(settings['location']);
+    //condition = {'icon': 'cloudy'};
     currentWeather = GetWeatherTheme(icon: condition['icon']);
     setState(() {});
   }
@@ -57,7 +67,7 @@ class _UserSettingsState extends State<UserSettings> {
   Widget build(BuildContext context) {
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final TextEditingController location = TextEditingController(
-        text: settings.isEmpty ? 'Location' : settings[0]);
+        text: settings.isEmpty ? 'Location' : settings['location']);
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -76,7 +86,9 @@ class _UserSettingsState extends State<UserSettings> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  settings.isEmpty ? Text('loading...') : Text(settings[0]),
+                  settings.isEmpty
+                      ? Text('loading...')
+                      : Text(settings['location']),
                   SizedBox(
                     child: Text(
                       '${condition['temp'].toString()} °C',
@@ -102,6 +114,14 @@ class _UserSettingsState extends State<UserSettings> {
                         width: 220,
                         child: TextFormField(
                           controller: location,
+                          onTap: () => location.clear(),
+                          onFieldSubmitted: (newValue) async {
+                            if (formKey.currentState!.validate()) {
+                              settings['location'] = location.value.text;
+                              await widget.prefs.saveSettings(settings);
+                              await _updateSettings();
+                            }
+                          },
 
                           // settings.isEmpty ? '' : settings[0]),
                           decoration: const InputDecoration(
@@ -115,17 +135,15 @@ class _UserSettingsState extends State<UserSettings> {
                           },
                         ),
                       ),
-                      ElevatedButton(
+                      IconButton(
                         onPressed: () async {
                           if (formKey.currentState!.validate()) {
-                            final settings_ =
-                                await SharedPreferences.getInstance();
-                            await settings_
-                                .setStringList(_key, [location.value.text]);
-                            await getWeather();
+                            settings['location'] = location.value.text;
+                            await widget.prefs.saveSettings(settings);
+                            await _updateSettings();
                           }
                         },
-                        child: const Icon(Icons.refresh),
+                        icon: const Icon(Icons.refresh),
                       ),
                     ],
                   ),

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:jumpy_mvp/data/database_repository.dart';
+import 'package:jumpy_mvp/data/shared_database_repository.dart';
 import 'package:jumpy_mvp/features/home/widgets/home_progress.dart';
 import 'package:jumpy_mvp/features/home/widgets/select_goal.dart';
 import 'package:jumpy_mvp/features/home/widgets/week_badges.dart';
 import 'package:jumpy_mvp/features/user_settings/screens/user_settings.dart';
 import 'package:jumpy_mvp/shared/widgets/animal_fill.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key, required this.repo, required this.prefs});
   final DatabaseRepository repo;
-  final SharedPreferencesAsync prefs;
+  final SharedDatabaseRepository prefs;
 
   @override
   State<Dashboard> createState() => _DashboardState();

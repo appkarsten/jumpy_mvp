@@ -67,7 +67,7 @@ class GetWeatherTheme extends StatelessWidget {
           decoration: BoxDecoration(
               gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 158, 169, 233),
+              Color.fromARGB(255, 155, 163, 209),
               AppColors.mainBackground,
               AppColors.mainBackground,
               AppColors.mainBackground,

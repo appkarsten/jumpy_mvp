@@ -23,7 +23,7 @@ class Weather {
 
     // final List names = users.map((e) => e['name']).toList();
     // final List names
-    print(weather['currentConditions']);
+    // print(weather['currentConditions']);
 
     //int conditions = weather['current']['weather_code'];
     // print(conditions);
