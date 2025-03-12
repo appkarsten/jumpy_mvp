@@ -37,13 +37,14 @@ class _UserSettingsState extends State<UserSettings> {
 
   Future<void> _updateSettings() async {
     //TODO set initial userSetting during onboarding
-    // final Map<String, dynamic> userSettings = {
-    //   'location': 'Berlin',
-    //   'sound': true,
-    //   'reminder': true,
-    //   'userNotification': true,
-    // };
-    // await widget.prefs.saveSettings(userSettings);
+    final Map<String, dynamic> _newSetting = {
+      'location': 'Berlin',
+      'Soundeffects': false,
+      'Daily Reminder': true,
+      'Motivating Messages': false
+    };
+    // await widget.prefs.saveSettings(_newSetting);
+
     settings = jsonDecode(await widget.prefs.getSettings());
     print(settings['location']);
     getWeather();
@@ -106,64 +107,89 @@ class _UserSettingsState extends State<UserSettings> {
             child: Column(
               children: [
                 SizedBox(height: 40),
-                Form(
-                  key: formKey,
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 220,
-                        child: TextFormField(
-                          controller: location,
-                          onTap: () => location.clear(),
-                          onFieldSubmitted: (newValue) async {
-                            if (formKey.currentState!.validate()) {
-                              settings['location'] = location.value.text;
-                              await widget.prefs.saveSettings(settings);
-                              await _updateSettings();
-                            }
-                          },
-
-                          // settings.isEmpty ? '' : settings[0]),
-                          decoration: const InputDecoration(
-                            label: Text('Location'),
-                          ),
-                          validator: (String? value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Enter Location';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () async {
-                          if (formKey.currentState!.validate()) {
-                            settings['location'] = location.value.text;
-                            await widget.prefs.saveSettings(settings);
-                            await _updateSettings();
-                          }
-                        },
-                        icon: const Icon(Icons.refresh),
-                      ),
-                    ],
-                  ),
-                ),
                 Align(
                     alignment: Alignment.topLeft,
                     child: Text(_user?.email ?? 'loading User...',
                         style: Theme.of(context).textTheme.titleMedium)),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: AppColors.boxBorder, width: 2),
-                    ),
-                    child: Column(children: [
-                      ToggleSettings(title: 'Soundeffects'),
-                      ToggleSettings(title: 'Daily Reminder'),
-                      ToggleSettings(title: 'Motivating Messages'),
-                    ]),
+                Spacer(),
+                Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 220,
+                            child: TextFormField(
+                              controller: location,
+                              onTap: () => location.clear(),
+                              onFieldSubmitted: (newValue) async {
+                                if (formKey.currentState!.validate()) {
+                                  settings['location'] = location.value.text;
+                                  await widget.prefs.saveSettings(settings);
+                                  await _updateSettings();
+                                }
+                              },
+
+                              // settings.isEmpty ? '' : settings[0]),
+                              decoration: const InputDecoration(
+                                label: Text('Location'),
+                              ),
+                              validator: (String? value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Enter Location';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () async {
+                              if (formKey.currentState!.validate()) {
+                                settings['location'] = location.value.text;
+                                await widget.prefs.saveSettings(settings);
+                                print(settings);
+                                await _updateSettings();
+                              }
+                            },
+                            icon: const Icon(Icons.refresh),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                color: AppColors.boxBorder, width: 2),
+                          ),
+                          child: Column(children: [
+                            ToggleSettings(
+                                prefs: widget.prefs,
+                                settings: settings.isEmpty ? {} : settings,
+                                title: 'Soundeffects',
+                                isTrue: settings.isEmpty
+                                    ? true
+                                    : settings['Soundeffects']),
+                            ToggleSettings(
+                                prefs: widget.prefs,
+                                settings: settings.isEmpty ? {} : settings,
+                                title: 'Daily Reminder',
+                                isTrue: settings.isEmpty
+                                    ? false
+                                    : settings['Daily Reminder']),
+                            ToggleSettings(
+                                prefs: widget.prefs,
+                                settings: settings.isEmpty ? {} : settings,
+                                title: 'Motivating Messages',
+                                isTrue: settings.isEmpty
+                                    ? false
+                                    : settings['Motivating Messages']),
+                          ]),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 Align(

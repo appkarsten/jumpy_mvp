@@ -6,6 +6,11 @@ class GetWeatherTheme extends StatelessWidget {
   const GetWeatherTheme({super.key, required this.icon});
   final String icon;
 
+// TODO build theme without switch from icon-string
+// contains('night') -> background: blue2black
+// contains('snow')  -> snowflakes
+// contains('clear' && 'partly-cloudy-day') -> SunWidget()
+
   @override
   Widget build(BuildContext context) {
     // if (icon.contains('night')) {
@@ -174,6 +179,8 @@ class GetWeatherTheme extends StatelessWidget {
             CloudWidget(
               cloudConfig: CloudConfig(
                 size: 60,
+                slideX: 40,
+                slideDurMill: 3000,
                 y: 70,
                 color: Color.fromARGB(100, 100, 98, 98),
               ),
@@ -183,6 +190,7 @@ class GetWeatherTheme extends StatelessWidget {
                 size: 160,
                 y: 30,
                 x: 150,
+                slideDurMill: 2000,
                 color: Color.fromARGB(119, 94, 93, 93),
               ),
             ),
