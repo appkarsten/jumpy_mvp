@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jumpy_mvp/features/challenges/widgets/activate_sensor.dart';
 import 'package:jumpy_mvp/features/challenges/widgets/stop_time.dart';
 import 'package:jumpy_mvp/shared/widgets/animal_fill.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
@@ -20,7 +21,7 @@ class ChallengeDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 0.0),
-      child: Column(
+      child: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 40.0),
@@ -69,7 +70,8 @@ class ChallengeDetail extends StatelessWidget {
               ),
             ),
           ),
-          StopTime(count: _count, counts: counts),
+          // StopTime(count: _count, counts: counts),
+          ActivateSensor(),
         ],
       ),
     );

@@ -165,12 +165,16 @@ class GetWeatherTheme extends StatelessWidget {
           decoration: BoxDecoration(
               gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 3, 4, 11),
-              Color.fromARGB(255, 32, 27, 61),
-              AppColors.mainBackground,
-              AppColors.mainBackground,
+              Color.fromARGB(255, 5, 4, 10),
+              Color.fromARGB(255, 12, 10, 32),
+              Color.fromARGB(255, 42, 39, 85),
+              Color.fromARGB(255, 87, 84, 148),
+              Color.fromARGB(204, 109, 105, 173),
+              // Colors.transparent,
               AppColors.mainBackground,
             ],
+            // stops: [0.1, 0.1, 0.1, 0.1, 0.1, 0.5],
+            // stops: [0.7, 0.4, 0.1, 0.1, 0.1, 0.1],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           )),
@@ -178,20 +182,21 @@ class GetWeatherTheme extends StatelessWidget {
           children: [
             CloudWidget(
               cloudConfig: CloudConfig(
-                size: 60,
-                slideX: 40,
+                size: 160,
+                slideX: 25,
                 slideDurMill: 3000,
-                y: 70,
-                color: Color.fromARGB(100, 100, 98, 98),
+                y: 120,
+                x: 200,
+                color: Color(0x65212121),
               ),
             ),
             CloudWidget(
               cloudConfig: CloudConfig(
-                size: 160,
-                y: 30,
-                x: 150,
+                size: 250,
+                y: 70,
+                x: 350,
                 slideDurMill: 2000,
-                color: Color.fromARGB(119, 94, 93, 93),
+                color: Color(0x6c212121),
               ),
             ),
           ],
