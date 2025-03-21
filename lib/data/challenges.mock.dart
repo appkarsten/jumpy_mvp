@@ -19,7 +19,7 @@ final List<Challenge> challenges = [
       category: 'SquatJumps',
       description: 'try to 60 times as fast as possible'),
   Challenge(
-      counts: 20,
+      counts: 5,
       category: 'Rotations',
       description: 'try to 20 times as fast as possible'),
   Challenge(

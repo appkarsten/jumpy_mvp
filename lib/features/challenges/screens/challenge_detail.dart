@@ -5,8 +5,8 @@ import 'package:jumpy_mvp/shared/widgets/animal_fill.dart';
 import 'package:jumpy_mvp/theme/app_colors.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class ChallengeDetail extends StatelessWidget {
-  const ChallengeDetail({
+class ChallengeDetail extends StatefulWidget {
+  ChallengeDetail({
     super.key,
     required this.fillHeight,
     required this.counts,
@@ -15,8 +15,13 @@ class ChallengeDetail extends StatelessWidget {
 
   final double fillHeight;
   final int counts;
-  final int _count;
+  int _count;
 
+  @override
+  State<ChallengeDetail> createState() => _ChallengeDetailState();
+}
+
+class _ChallengeDetailState extends State<ChallengeDetail> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,14 +31,15 @@ class ChallengeDetail extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 40.0),
             child: SizedBox(
-              height: fillHeight,
+              height: widget.fillHeight,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   AnimalFill(
-                      fillHeight: fillHeight / counts * _count,
-                      llamaHeight: fillHeight),
+                      fillHeight:
+                          widget.fillHeight / widget.counts * widget._count,
+                      llamaHeight: widget.fillHeight),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -42,27 +48,27 @@ class ChallengeDetail extends StatelessWidget {
                       ),
                       // todo create widget in shared for circular and text indicator
                       // hard coded repeat of text and circular indicator
-                      Text(_count.toString(),
+                      Text(widget._count.toString(),
                           style: Theme.of(context).textTheme.headlineLarge),
                       Text('von'),
-                      Text('$counts',
+                      Text('${widget.counts}',
                           style: Theme.of(context).textTheme.displayLarge),
                       Spacer(
                         flex: 1,
                       ),
 
-                      CircularPercentIndicator(
-                        radius: 48,
-                        lineWidth: 11,
-                        percent: _count / counts,
-                        progressColor: AppColors.accentColor,
-                        backgroundColor: AppColors.animalColor,
-                        circularStrokeCap: CircularStrokeCap.round,
-                        center: Text(
-                          '${(_count / counts * 100).toStringAsFixed(1)}%',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ),
+                      // CircularPercentIndicator(
+                      //   radius: 48,
+                      //   lineWidth: 11,
+                      //   percent: _count / counts,
+                      //   progressColor: AppColors.accentColor,
+                      //   backgroundColor: AppColors.animalColor,
+                      //   circularStrokeCap: CircularStrokeCap.round,
+                      //   center: Text(
+                      //     '${(_count / counts * 100).toStringAsFixed(1)}%',
+                      //     style: Theme.of(context).textTheme.titleMedium,
+                      //   ),
+                      // ),
                       Spacer(),
                     ],
                   )
@@ -71,7 +77,13 @@ class ChallengeDetail extends StatelessWidget {
             ),
           ),
           // StopTime(count: _count, counts: counts),
-          ActivateSensor(),
+          ActivateSensor(
+            counts: widget.counts,
+            countJump: () {
+              widget._count++;
+              setState(() {});
+            },
+          ),
         ],
       ),
     );

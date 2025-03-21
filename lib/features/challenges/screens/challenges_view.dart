@@ -79,7 +79,7 @@ class _ChallengesPageState extends State<ChallengesPage> {
     }
     // section challenge starter
     else {
-      double fillHeight = 400;
+      double fillHeight = 100;
       return Scaffold(
         appBar: AppBar(
             // create go back to challenge overview

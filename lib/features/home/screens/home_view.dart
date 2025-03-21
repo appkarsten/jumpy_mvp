@@ -56,7 +56,7 @@ class _DashboardState extends State<Dashboard> {
               icon: Icon(Icons.settings))
         ],
       ),
-      body: Column(
+      body: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
