@@ -26,8 +26,9 @@ class _ActivateSensorState extends State<ActivateSensor> {
 
   @override
   void dispose() {
-    _subscription?.cancel();
     super.dispose();
+    _subscription?.cancel();
+    timer?.cancel();
   }
 
   StreamSubscription? _subscription;
@@ -36,6 +37,24 @@ class _ActivateSensorState extends State<ActivateSensor> {
   List<double> countJumps = [];
   List<Widget> sensorData = [];
   List<List<double>> _accelerator = [];
+
+  void startTimer() {
+    timer = Timer.periodic(Duration(microseconds: 1), (_) => addTime());
+  }
+
+  void addTime() {
+    final addMilliseconds = 1;
+    // as long as count jumps < challenge jumps
+    // run stopwatch
+    if (countJumps.length < widget.counts) {
+      setState(() {
+        final milliseconds = duration.inMilliseconds + addMilliseconds;
+        duration = Duration(milliseconds: milliseconds);
+      });
+    } else {
+      timer?.cancel();
+    }
+  }
 
   void _startListening() {
     _subscription?.cancel();
@@ -90,6 +109,7 @@ class _ActivateSensorState extends State<ActivateSensor> {
           countJumps.add(1);
           if (countJumps.length == widget.counts) {
             _subscription?.cancel();
+            timer?.cancel();
           }
         }
       },
@@ -105,6 +125,7 @@ class _ActivateSensorState extends State<ActivateSensor> {
         InkWell(
             onTap: () {
               _startListening();
+              startTimer();
             },
             child: Container(
               height: 100,
@@ -121,24 +142,6 @@ class _ActivateSensorState extends State<ActivateSensor> {
                           style: Theme.of(context).textTheme.headlineMedium),
                     ),
             )),
-
-        // ElevatedButton(
-        //     child: const Text("Start"),
-        //     onPressed: () {
-        //       _startListening();
-        //     }),
-        // ElevatedButton(
-        //   style: ElevatedButton.styleFrom(
-        //     backgroundColor: Colors.red,
-        //   ),
-        //   onPressed: () {
-        //     isJumping = false;
-        //     _subscription?.cancel();
-        //     setState(() {});
-        //   },
-        //   child: const Text("Stop"),
-        // ),
-
         for (Widget rowData in sensorData) rowData,
       ],
     );
